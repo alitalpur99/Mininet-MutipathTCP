@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-""" Script to use MPTCP in Mininet """
+""" Script to use MPTCP in Mininet. Run on commandline as, python 2host-2switch-mptcp.py """
 
 from mininet.net import Mininet
 from mininet.node import Controller, RemoteController, OVSKernelSwitch, UserSwitch
