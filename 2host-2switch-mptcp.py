@@ -8,7 +8,6 @@ from mininet.cli import CLI
 from mininet.log import setLogLevel
 from mininet.link import Link, TCLink
 
-# Defining Topology
 def topology():
     "Create a network."
   # Defining network 
