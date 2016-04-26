@@ -2,6 +2,7 @@
 Two Hosts and Four Switches in Full Mesh topology (all possible connection), hence with loops in topology.
 Adding the 'topos' dict with a key/value pair to generate our newly defined
 topology enables one to pass in '--topo=mytopo' from the command line.
+NOTE: Must be used with Controller capable of detecting the loops in topology.
 """
 
 from mininet.topo import Topo
