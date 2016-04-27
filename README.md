@@ -20,6 +20,7 @@ a. MPTCP Kernel-3.18 (http://multipath-tcp.org/pmwiki.php/Users/AptRepository) r
 b. An OpenFlow based Controller running remotely (IP=127.0.0.1, Port=6653)
 -----------------------------------------------------------------------------------
 3. Mininet Custom Topo (singleswitch-mptcp.py): MPTCP implementation, without Controller, with single switch (with four ports) and two hosts. Topo as shown below:
+
                               _________                  _________            _________
                               |       | ----------------|        |-------------|        |
                               |   h1  | ----------------|   s1   |-------------|  h2    |
