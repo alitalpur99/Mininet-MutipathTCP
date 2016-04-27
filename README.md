@@ -19,7 +19,7 @@ Pre-requesite are:
 a. MPTCP Kernel-3.18 (http://multipath-tcp.org/pmwiki.php/Users/AptRepository) running on Ubuntu 14.04 and enabled using (sudo sysctl -w net.mptcp.mptcp_enabled=1)
 b. An OpenFlow based Controller running remotely (IP=127.0.0.1, Port=6653)
 -----------------------------------------------------------------------------------
-3. Mininet Custom Topo (singleswitch-mptcp.py): MPTCP implementation, without Controller, with single switch (with four ports) and two hosts. Topo as shown below:
+3. Mininet Custom Topo (singleswitch-mptcp.py): MPTCP implementation, without Controller, with single switch (with four ports) and two hosts. Each host has two interface on different subnets to utilize the MPTCP. Topo as shown below:
 
                               _________                  _________            _________
                               |       | ----------------|        |-------------|        |
