@@ -1,8 +1,8 @@
 #!/usr/bin/python
 """
-2 hosts (h1 h2 directly connected) via two interfaces to utilize the multipath.
-iperf result show twice the bandwidth i.e. for two 100Mbps links aroung 188Mbps.
-
+3 hosts (h1 h2 h3) connected via switch on one subnet. Hosts h1 h2 also connected directly via another interace path.
+iperf -s h2, and h1 and h3 as client.
+Pre-req Enabeled: 1. Mptcp enabled, 2. sudo sysctl net.ipv4.tcp_congestion_control=reno
 """
 
 from mininet.net import Mininet
@@ -21,14 +21,16 @@ def topology():
     s1 = net.addSwitch ( 's1')
 
     print "*** Creating links"
-
+    
+    #direct connection between h1 and h2
     net.addLink(h1, h2, intfName1='h1-eth0', intfName2='h2-eth0',bw=100)
+    # connection via switch s1
     net.addLink(h1, s1, intfName1='h1-eth1', intfName2='s1-eth1', bw=100)
     net.addLink(h2, s1, intfName1='h2-eth1', intfName2='s1-eth2', bw=100)
     net.addLink(h3, s1, intfName1='h3-eth0', intfName2='s1-eth0', bw=100)
     h1.cmd('ifconfig h1-eth1 10.0.10.11/24 netmask 255.255.255.0')
     h2.cmd('ifconfig h2-eth1 10.0.10.22/24 netmask 255.255.255.0')
-# h3 cant ping h2?
+
     print "*** Starting network"
     net.build()
     print "*** Running CLI"
