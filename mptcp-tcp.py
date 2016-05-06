@@ -2,6 +2,7 @@
 """
 3 hosts (h1 h2 h3) connected via switch on one subnet. Hosts h1 h2 also connected directly via another interace path.
 iperf -s h2, and h1 and h3 as client.
+h1-eth1 10.0.10.11,h2-eth1 10.0.10.22, h3-eth0 10.0.10.33
 Pre-req Enabeled: 1. Mptcp enabled, 2. sudo sysctl net.ipv4.tcp_congestion_control=reno
 """
 
@@ -33,6 +34,14 @@ def topology():
 
     print "*** Starting network"
     net.build()
+   # start s1 switch
+    s1.start('')
+    s1.cmd('switch s1 start')
+   # add flows in switch
+    s1.cmd('ovs-ofctl add-flow s1 in_port=1,actions:output=2')
+    s1.cmd('ovs-ofctl add-flow s1 in_port=3,actions:output=2')
+    s1.cmd('ovs-ofctl add-flow s1 in_port=2,actions:output=1,3')
+
     print "*** Running CLI"
     CLI( net )
     print "*** Stopping network"
@@ -43,3 +52,5 @@ if __name__ == '__main__':
     setLogLevel( 'info' )
 
     topology()
+
+
