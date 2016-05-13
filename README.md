@@ -1,5 +1,5 @@
 # mininet-topologies
-Mininet different topologies for MPTCP using different configurations.
+Mininet topologies for MPTCP using different configurations, with and without controller.
 
 # SDN - Pox Flow stats
 Port =80, HTTP based flow stats collection on Pox Controller.
