@@ -1,0 +1,34 @@
+Run test
+========================
+-RUN RENO.SH
+sysctl -w net.ipv4.tcp_congestion_control=reno
+- SET TCP_WIN_SCAL OFF (avoid scaling off, because it will generate 'tcp-win-full' in wireshark output)
+sysctl -w net.ipv4.tcp_window_scaling=1/0
+-SET TCP AUTOTUNING OFF
+sysctl -w net.ipv4.tcp_moderate_rcvbuf=1/0
+
+
+-RUN POX/TOPO
+Add flow-table/or run forwarding ali.py
+
+-RUN ETH.SH For EACH HOST
+sudo ethtool -K eth0 gso off
+sudo ethtool -K eth0 gro off
+sudo ethtool -K eth0 tso off
+
+-TCPDUMP ON CLIENT 10.0.0.1
+
+-RUN SNOOP AND SAVE TO FILE
+sh ovs-ofctl snoop s1 --timestamp 2>&1 | tee dump1
+sh ovs-ofctl snoop s2 --timestamp 2>&1 | tee dump2
+
+-RUN IPERF and SAVE TO FILE
+iperf3 -s | tee file 
+iperf3 -c 10.0.0.4 -i1 -t100 | tee file
+
+-PCAP TSHARK CONV
+tshark -r filepcap > newfiletxt
+
+-ANALYZE RESULT
+run get_stats 
+
