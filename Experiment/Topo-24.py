@@ -35,7 +35,7 @@ def topology():
 	net.addLink(h3, s2, intfName1='h3-eth0', intfName2='s2-eth1')
 	net.addLink(h4, s2, intfName1='h4-eth0', intfName2='s2-eth2')
 
-	net.addLink(s1, s2, intfName1='s1-eth3', intfName2='s2-eth3',bw=10, delay='20ms')#,loss=1)
+	net.addLink(s1, s2, intfName1='s1-eth3', intfName2='s2-eth3', bw=10, delay='20ms')#, max_queue_size=10)#,loss=1)
 	
 
 	print "*** Starting network"
@@ -45,6 +45,25 @@ def topology():
 	s1.cmd('switch s1 start')
 	s2.start([c0])
 	s2.cmd('switch s2 start')
+	
+	# to set tcp segmentation tso, gro, gso offloading disabled
+
+	h1.cmd('bash eth.sh')
+	h2.cmd('bash eth.sh')
+	h3.cmd('bash eth.sh')
+	h4.cmd('bash eth.sh')
+	s1.cmd('bash eth.sh')
+	s2.cmd('bash eth.sh')
+	# h1.cmd('tcpdump -i h1-eth0 -w h1')
+	# h4.cmd('tcpdump -i h4-eth0 -w h4')
+	# h4.cmd('iperf3 -s')
+	# h3.cmd('iperf3 -s')
+	net.pingAll()
+	# h1, h4 = net.get('h1', 'h4')
+	# net.iperf((h1,h4))
+	
+	# h1.cmd()
+
 	# s3.start([c0])
 	# s3.cmd('switch s3 start')
 	# s4.start([c0])
@@ -78,6 +97,3 @@ def topology():
 if __name__ == '__main__':
 	setLogLevel( 'info' )
 	topology()
-
-
-	
