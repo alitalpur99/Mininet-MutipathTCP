@@ -1,0 +1,34 @@
+Run test setup
+========================
+	1. start pox.py forwarding.ali
+	 (use ali, ali2 generate less packet-ins due to high load
+	 from wireshark comparison, ali show number of paketins same as wiresahrk tcp_src=55000)
+	
+	2. run ./Topo-24.py
+		sets all nodes/switches ethtool k command to make tso,gro and gso off
+		(Run topo for less than 30 secs)	
+
+	3-RUN > sh bash reno.sh
+		sysctl -w net.ipv4.tcp_congestion_control=reno
+		- SET TCP_WIN_SCAL OFF (avoid scaling off, because it will generate 'tcp-win-full' in wireshark output)
+		sysctl -w net.ipv4.tcp_window_scaling=1/0
+		-SET TCP AUTOTUNING OFF
+		sysctl -w net.ipv4.tcp_moderate_rcvbuf=1/0
+
+	4. Run tcpprobe module 
+		modprobe tcp_probe port=55000 full=1
+		cat /proc/net/tcpprobe > tcpprobeout &
+
+	5-RUN SNOOP AND SAVE TO FILE
+		sh ovs-ofctl snoop s1 --timestamp 2>&1 | tee switch1
+		sh ovs-ofctl snoop s2 --timestamp 2>&1 | tee switch2
+
+		sh ovs-ofctl snoop s1 --timestamp 2> switch1
+		sh ovs-ofctl snoop s2 --timestamp 2> switch2
+
+
+
+	6.run on h3iperf3 -s 
+		and h4.sh, h1.sh, h2.sh
+		h1 for 30 sec
+		h2 for 5 sec, after 5, 15 sec
