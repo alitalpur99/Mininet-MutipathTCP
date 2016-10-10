@@ -43,12 +43,12 @@ with open('switch2-result.txt', 'r') as tfile:
 		chksum2.append(l[-1:])
 	
 	for d in range(len(sec2)):
-		if j > 0:
+		if d > 0:
 			# print i
 			# Calculate the difference of time (mins2 and sec2onds)
 			mins2_diff.append('{0:.6}'.format(float(mins2[j])-float(mins2[j-1])))
 			sec2_diff.append('{0:.6f}'.format(float(sec2[j])-float(sec2[j-1])))
-		j+=1
+		
 	
 # Create and empty Time file 
 open('switch2-time.txt', 'w').close()
