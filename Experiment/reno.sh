@@ -9,4 +9,7 @@ sysctl -w net.ipv4.tcp_moderate_rcvbuf=0
 #tcp window scaling off
 sysctl -w net.ipv4.tcp_window_scaling=1
 
+#tcp rmem should not be a limit
+sysctl -w net.ipv4.tcp_rmem="10240 3145728 16777216"
+
 #python Topo-24.py
