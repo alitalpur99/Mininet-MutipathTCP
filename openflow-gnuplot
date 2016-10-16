@@ -1,0 +1,23 @@
+#!/bin/bash
+set terminal pngcairo size 1600,900
+
+set output "OF-delay-with-RTT.png"
+
+set key reverse right top font ",14" 
+set key spacing 1.0
+
+set multiplot layout 1,1 title "Queue size 100 packets (OF Oneway delay vs. Kernel RTT" font "Arial-Bold,20"
+set xlabel "Time (sec) " font ",12" 
+set xrange [0:10]
+set grid
+offset_D=13305.292824
+offset_D1=25.973
+mul=1
+set yrange[0:60]
+set ylabel "NOT SCALED (sec*1000 (just to show  both graphs)) " font ",12"
+#plot"s2delaytime" using ($1-offset_D1):(($2)*10) title "Openflow One-way delay" with lines lt rgb "brown","s2delaytime"using ($1-offset_D1):(($2)*10) title "Openflow One-way delay" with points lt rgb "black","rtt_new_11" using (($1-offset_D)*mul):(($2)*0.00001) title "RTT"  with points lt rgb "orange", "timedelay" using ($1-offset_D):(($2)*10) title "Wireshark One-way delay" with points lt rgb "green","s2iattime" using ($1-offset_D1):(($2)*100) title "Openflow One-way delay" with lines lt rgb "blue"
+
+
+plot"openflowdelaytime_new_11" using ($1-offset_D1):(($3)*100) title "Openflow One-way delay" with points lt rgb "black","rtt_new_11" using (($1-offset_D)*mul):(($2)*0.00001) title "RTT"  with points lt rgb "orange","tcpdump-timedelay" using ($1-offset_D1):(($2)*100) title "Wireshark One-way delay" with points lt rgb "blue"
+#,"s2iattime" using ($1-offset_D1):(($2)*100) title "Openflow One-way delay" with lines lt rgb "blue"
+#, "s2iattime" using ($1-offset_D1):(($2)*100) title "Openflow One-way delay" with points lt rgb "black"
