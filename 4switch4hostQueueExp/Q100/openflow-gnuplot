@@ -6,7 +6,7 @@ set output "OF-delay-with-RTT.png"
 set key reverse right top font ",14" 
 set key spacing 1.0
 
-set multiplot layout 1,1 title "Queue size 100 packets (OF Oneway delay vs. Wireshark Oneway delay vs. Kernel RTT)" font "Arial-Bold,20"
+set multiplot layout 1,1 title "OpenFlow Oneway delay vs Kernel Estimated RTT vs Wireshark Oneway delay - BW=10Mbps, RTT=40ms, Queue size 100 packets" font "Arial-Bold,18"
 set xlabel "Time (sec) " font ",12" 
 set xrange [0:20]
 set grid
@@ -14,7 +14,7 @@ offset_D=797141.798964
 offset_D1=59.759
 offset_D2=59.7788
 set yrange[0:150]
-set ylabel "msec" font ",12"
+set ylabel "Time (msec)" font ",12"
 #set ylabel "msec (OF oneway delay (ms*100))" font ",12"
 #plot"s2delaytime" using ($1-offset_D1):(($2)*10) title "Openflow One-way delay" with lines lt rgb "brown","s2delaytime"using ($1-offset_D1):(($2)*10) title "Openflow One-way delay" with points lt rgb "black","rtt_new_11" using (($1-offset_D)*mul):(($2)*0.00001) title "RTT"  with points lt rgb "orange", "timedelay" using ($1-offset_D):(($2)*10) title "Wireshark One-way delay" with points lt rgb "green","s2iattime" using ($1-offset_D1):(($2)*100) title "Openflow One-way delay" with lines lt rgb "blue"
 
