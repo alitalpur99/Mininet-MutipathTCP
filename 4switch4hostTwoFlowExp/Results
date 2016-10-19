@@ -1,4 +1,7 @@
+Comments
+
 Topology:
+
 4switches (s1.s2.s3.s) and 4hosts (h1-s1, s2-h2, s3-h4, s4-h4)
 Two competing flows (second flow started at 5sec, and again at 15sec)
 BW=10Mbps, RTT=40ms, Queue size=100 packets, 
@@ -7,3 +10,7 @@ The plots for Wireshark, OpenFlow and RTT show similar trends. All grow up durin
 at time=5sec, and 15 sec. 
 Also due to the second flow isertion, there is congestion and hence the packets are dropped at switch-2.
 
+Note:
+
+The RAW Kernel RTT values are multiplied by (0.000125 , i.e. [1/(8*1000)]) to achieve the required value of
+40ms RTT actually inserted between the switches S2-S3.
