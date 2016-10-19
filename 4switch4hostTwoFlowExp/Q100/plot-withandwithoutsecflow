@@ -1,0 +1,28 @@
+#!/bin/bash
+set terminal pngcairo size 1600,900
+
+set output "CombinedwithNosecondflow.png"
+
+set key reverse right top font ",14" 
+set key spacing 1.0
+
+#set multiplot layout 2,1 title "OpenFlow Oneway delay vs Kernel Estimated RTT vs Wireshark Oneway delay - BW=10Mbps, RTT=40ms, Queue size 100 packets" font "Arial-Bold,18"
+set multiplot layout 2,1 title "Kernel Estimated RTT with competing second flow and with only single flow - BW=10Mbps, RTT=40ms, Queue size 100 packets" font "Arial-Bold,15"
+set xlabel "Time (sec) " font ",12" 
+set xrange [0:20]
+set grid
+offset_D0=797141.839907
+offset_D=122275.291706
+offset_D1=38.6
+offset_D2=38.62071
+set yrange[0:160]
+set ylabel "Time (msec)" font ",12"
+
+plot "rtt_new_11" using ($1-offset_D):(($2)*0.000125) title "RTT while competing with second flow"  with points lt rgb "red"
+
+
+set yrange[0:160]
+set ylabel "Time (msec)" font ",12"
+plot "rtt_100" using (($1-offset_D0)):(($2)*0.000125) title "RTT while only single flow"  with points lt rgb "red"
+unset ylabel
+unset title
