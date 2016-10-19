@@ -1,0 +1,9 @@
+Topology:
+4switches (s1.s2.s3.s) and 4hosts (h1-s1, s2-h2, s3-h4, s4-h4)
+Two competing flows (second flow started at 5sec, and again at 15sec)
+BW=10Mbps, RTT=40ms, Queue size=100 packets, 
+
+The plots for Wireshark, OpenFlow and RTT show similar trends. All grow up during second flow insertion,
+at time=5sec, and 15 sec. 
+Also due to the second flow isertion, there is congestion and hence the packets are dropped at switch-2.
+
