@@ -1,4 +1,4 @@
-# iperf multicast on Mininet
+# iperf UDP Multicast on Mininet
 ### iperf server h3
 ### iperf client h1 and h2
 ### data transmission from h1 and h2 to server h3
