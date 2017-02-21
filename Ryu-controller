@@ -1,0 +1,24 @@
+For OF v1.0
+----------------
+> cd ryu
+> ./bin/ryu-manager --verbose ryu/app/simple_switch.py
+
+Run mininet
+> sudo mn --controller remote --mac --switch ovsk
+> pingall # should be successful
+------------------------------
+
+
+For OF v1.3
+----------------
+> cd ryu
+> ./bin/ryu-manager --verbose ryu/app/simple_switch_13.py
+# running switch with OF v1.3
+
+Run mininet
+> sudo mn --topo --controller remote --mac --switch ovsk
+> xterm s1
+>s1>ovs-vsctl set bridge s1 protocols=OpenFlow13 # to run switch in OpenFlow v1.3
+>pingall # should be success
+
+---------------
